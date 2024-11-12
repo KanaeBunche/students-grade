@@ -1,25 +1,29 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import studentsData from './students.json'; // Import the students data
 import './App.css';
+const App = () => {
+  const [students, setStudents] = useState([]);
 
-function App() {
+  // Fetch students from the JSON file
+  useEffect(() => {
+    setStudents(studentsData);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app-container">
+      <h1>Student Directory</h1>
+      <div className="students-container">
+        {students.map((student, index) => (
+          <div key={index} className="student-card">
+            <h2>{student.name}</h2>
+            <p><strong>Age:</strong> {student.age}</p>
+            <p><strong>Grade:</strong> {student.grade}</p>
+            <p><strong>Subject:</strong> {student.subject}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
-}
+};
 
 export default App;
